@@ -3,10 +3,10 @@
 
  <send>
  	<![CDATA[
- 	INVITE sip:64930071418@[remote_ip]:[remote_port] SIP/2.0
+ 	INVITE sip:1002@[remote_ip]:[remote_port] SIP/2.0
 	Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
  	From: 1000 <sip:1000@[local_ip]:[local_port]>;tag=[call_number]
- 	To: 64930071418 <sip:64930071418@[remote_ip]:[remote_port]>
+ 	To: 1002 <sip:1002@[remote_ip]:[remote_port]>
 	Call-ID: [call_id]
  	Cseq: [cseq] INVITE
  	Contact: sip:1000@[local_ip]:[local_port]
@@ -39,11 +39,11 @@
 <send retrans="500">
 <![CDATA[
 
-    CANCEL sip:64930071418@[remote_ip]:[remote_port] SIP/2.0
+    CANCEL sip:1002@[remote_ip]:[remote_port] SIP/2.0
     [last_Via:]
     Max-Forwards: 10
     From: "Omid Mohajeran" <sip:1000@[local_ip]:[local_port]>;tag=[peer_tag_param]
-    To: <sip:64930071418@[local_ip]:[local_port]>
+    To: <sip:1002@[local_ip]:[local_port]>
     Call-ID: [call_id]
     CSeq: 1 CANCEL
     Content-Length: 0
