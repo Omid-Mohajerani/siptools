@@ -40,7 +40,7 @@
         state: started
         enabled: yes
 
-    - name: "Create symbolic link for docker-compose"
+    - name: "Create a symbolic link for docker-compose"
       file:
         src: "/usr/libexec/docker/cli-plugins/docker-compose"
         dest: "/usr/bin/docker-compose"
@@ -52,5 +52,5 @@
         repo: 'https://github.com/sipcapture/homer7-docker'
         dest: "/tmp/homer7-docker"
 
-    - name: "Running docker compse"
+    - name: "Running docker compose"
       shell: docker-compose -f /tmp/homer7-docker/heplify-server/hom7-prom-all/docker-compose.yml up -d
