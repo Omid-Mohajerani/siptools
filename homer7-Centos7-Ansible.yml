@@ -1,0 +1,56 @@
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: "Installing basic Packages"
+      yum:
+        name:
+          - git
+          - vim
+        state: present
+
+    - name: "Installing Docker Prerequisite packages"
+      yum:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+        state: latest
+
+    - name: "Configuring docker-ce repo"
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: 0644
+
+    - name: "Installing Docker latest version"
+      yum:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: " Starting and Enabling Docker service"
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: "Create symbolic link for docker-compose"
+      file:
+        src: "/usr/libexec/docker/cli-plugins/docker-compose"
+        dest: "/usr/bin/docker-compose"
+        state: link
+
+    - name: "Download Homer 7 from  GitRepo"
+      become: yes
+      git:
+        repo: 'https://github.com/sipcapture/homer7-docker'
+        dest: "/tmp/homer7-docker"
+
+    - name: "Running docker compse"
+      shell: docker-compose -f /tmp/homer7-docker/heplify-server/hom7-prom-all/docker-compose.yml up -d
